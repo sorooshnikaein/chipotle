@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <div class="mapchange2"><button onclick="valuechangedincome()">Markers</button></div>
+    <div class="mapchange"><button onclick="createlayer()">Data Layer</button></div>
+    <div class="mapchange"><button onclick="createlayer(true)">Data Layer Names</button></div>
+
+    <div class="mapchange4"><button onclick="add_value()">Marker Layer</button></div>
+
+    <div class="mapvalue" id="restaurants">
+      <div class="image-total">
+        <div style="background: rgba(230,0,0, .95)" class="image-stable"></div><div class="image-text">Above 15%</div>
+      </div>
+            <div class="image-total">
+        <div style="background: rgba(230,10,0, .85)" class="image-stable"></div><div class="image-text">10% - 15%</div>
+      </div>
+            <div class="image-total">
+        <div style="background: rgba(230,20,0, .75)" class="image-stable"></div><div class="image-text">8% - 10%</div>
+      </div>
+            <div class="image-total">
+        <div style="background: rgba(230,35,0, .62)" class="image-stable"></div><div class="image-text">6% - 8%</div>
+      </div>
+            <div class="image-total">
+        <div style="background: rgba(230,45,0, .58)" class="image-stable"></div><div class="image-text">4% - 6%</div>
+      </div>
+            <div class="image-total">
+        <div style="background: rgba(230,55,0, .5)" class="image-stable"></div><div class="image-text">2% - 4%</div>
+      </div>
+            <div class="image-total">
+        <div style="background: rgba(230,65,0, .42)" class="image-stable"></div><div class="image-text">Under 2%</div>
+      </div>
+    </div>
+<!--     <title></title>
+    <div class="mapchange3"><button onclick="add_markers()">Markers</button></div>
+
+
+    <div class="mapvalue" id="expense-income">
+      <div class="image-total">
+        <div style="background: rgba(0,0,90, .95)" class="image-stable"></div><div class="image-text">Above 15%</div>
+      </div>
+            <div class="image-total">
+        <div style="background: rgba(0,0,110, .85)" class="image-stable"></div><div class="image-text">10% - 15%</div>
+      </div>
+            <div class="image-total">
+        <div style="background: rgba(0,0,150, .65)" class="image-stable"></div><div class="image-text">8% - 10%</div>
+      </div>
+            <div class="image-total">
+        <div style="background: rgba(0,0,160, .62)" class="image-stable"></div><div class="image-text">6% - 8%</div>
+      </div>
+            <div class="image-total">
+        <div style="background: rgba(0,0,180, .58)" class="image-stable"></div><div class="image-text">4% - 6%</div>
+      </div>
+            <div class="image-total">
+        <div style="background: rgba(0,0,200, .5)" class="image-stable"></div><div class="image-text">2% - 4%</div>
+      </div>
+            <div class="image-total">
+        <div style="background: rgba(0,0,220, .4)" class="image-stable"></div><div class="image-text">Under 2%</div>
+      </div>
+    </div>
+
+
+    <div class="mapvalue" id="expense">
+      <div class="image-total">
+        <div style="background: rgba(0, 60, 0, .98)" class="image-stable"></div><div class="image-text">Above $30,000</div>
+      </div>
+            <div class="image-total">
+        <div style="background: rgba(0, 70, 0, .94)" class="image-stable"></div><div class="image-text">$26,000 - $30,000</div>
+      </div>
+            <div class="image-total">
+        <div style="background: rgba(0, 80, 0, .9)" class="image-stable"></div><div class="image-text">$22,000 - $26,000</div>
+      </div>
+            <div class="image-total">
+        <div style="background: rgba(0, 90, 0, .86)" class="image-stable"></div><div class="image-text">$18,000 - $22,000</div>
+      </div>
+            <div class="image-total">
+        <div style="background: rgba(0, 130, 0, .80)" class="image-stable"></div><div class="image-text">$14,000 - $18,000</div>
+      </div>
+            <div class="image-total">
+        <div style="background: rgba(0, 170, 0, .7)" class="image-stable"></div><div class="image-text">$10,000 - $14,000</div>
+      </div>
+            <div class="image-total">
+        <div style="background: rgba(0, 210, 0, .5)" class="image-stable"></div><div class="image-text">Under $10,000</div>
+      </div>
+    </div> -->
+
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    .image-total{
+      margin: 5px 0px;
+    }
+    .image-stable{
+      width: 13px;
+      height: 13px;
+      display: inline-block;
+    }
+    .image-text{
+          display: inline-block;
+    position: absolute;
+    width: 130px;
+    margin-left: 20px;
+    }
+    .mapchange{
+      position: absolute;
+      z-index: 5;
+    }
+    .mapchange2{
+      position: absolute;
+      z-index: 5;
+      left: 150px
+    }
+    .mapboxgl-ctrl-attrib{
+      display: none;
+    }
+    .mapvalue{
+    position: absolute;
+    z-index: 5;
+    bottom: 70px;
+    /*right: 800px;*/
+    background: #fff;
+    padding: 0px 7px;
+    width: 130px;
+    border-radius: 5px;
+    font-size: 12px;
+    left: 50px;
+    }
+    .mapchange3{
+      position: absolute;
+      z-index: 5;
+      left: 150px
+    }
+    .mapchange4{
+            position: absolute;
+      z-index: 5;
+      left: 280px
+    }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+      .marker-pin {
+  width: 30px;
+  height: 30px;
+  border-radius: 50% 50% 50% 0;
+  background: #00263E;
+  position: absolute;
+  transform: rotate(-45deg);
+  left: 50%;
+  top: 50%;
+  margin: -15px 0 0 -15px;
+  
+}
+.marker-pin::before {
+    content: '';
+    width: 24px;
+    height: 24px;
+    margin: 3px 0 0 3px;
+    background: #9e9edc;
+    position: absolute;
+    border-radius: 50%;
+ }
+ .building-mapbox{
+  margin-top: -11px;
+  margin-left: -11px;
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  border-radius: 50%;
+  z-index: 5;
+}
+ .business-checker-image{
+  width: 22px;
+    display: inline-block;
+}
+#restaurants{
+  display: none;
+}
+.business-checker-single{
+  height: 30px;
+}
+    </style>
+  </head>
+  <body>
+    <div id='map'></div>
+    <script>
+		mapboxgl.accessToken = 'pk.eyJ1Ijoic25pa2FlaW4iLCJhIjoiY2s1eWNpcWxrMDJvbzNtcDdyb3puNTVrMCJ9.t-VFWsbpRo--tRSLgLa9ng';
+		var map = new mapboxgl.Map({
+		  container: 'map',
+		  style: 'mapbox://styles/mapbox/streets-v10',
+		  center: [-98.5795, 39.8283], // starting position
+		  zoom: 2.2
+		});
+
+    async function  createmarkerhere(businesses, color){
+
+      var logo_final_val = "https://maptize.s3.amazonaws.com/public/Chipotle"
+      let image = (logo_final_val)? "<img class='business-checker-image' src="+ logo_final_val + " />": "<div class='business-checker-image business-checker-single'></div>";
+
+      let el = document.createElement('div');
+      let logo_final = `<img src= ${logo_final_val} onerror= "this.style.display='none'" class='building-mapbox'></img>`;
+
+      el.className = 'custom-div-icon';
+      el.innerHTML += "<div style='background-color:"+ color +";' class='marker-pin'></div>" + logo_final;
+
+      var marker = new mapboxgl.Marker(el).setLngLat([businesses.coordinates[0], businesses.coordinates[1]])
+      .addTo(map);
+      return marker
+    }
+    async function createlayer(shownames){
+      document.getElementById("restaurants").style.display = "block"
+            var values = await fetch("./All_restaurants.json")
+      var value_data = await values.json() 
+
+      values = value_data.map((e) => { return{"type": "Feature", geometry: e.geometry, properties: {"color": e.color, description: e.num}}})
+      map.addSource("polygon-color", {
+          'type': 'geojson',
+          'data': {
+          'type': 'FeatureCollection',
+          'features': values
+          }
+        })
+        map.addLayer({
+          'id': "polygon-color",
+          'type': 'fill',
+          'source': "polygon-color",
+          'layout': {},
+          'maxzoom': 14.5,
+          'paint': {
+            'fill-color': {
+              type: 'identity',
+              property: 'color',
+          },
+          'fill-opacity': 1,
+          }
+          });
+        if(shownames){
+      map.addSource('zipcode_names', {
+        'type': 'geojson',
+        'data': {
+          'type': 'FeatureCollection',
+          'features': values
+        }
+        });
+        map.addLayer({
+          'id': 'zipcode_names',
+          'type': 'symbol',
+          'source': 'zipcode_names',
+          'layout': {
+          'text-field': ['get', 'description'],
+          'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
+          'text-radial-offset': 0.5,
+          'text-justify': 'auto',
+          }
+          });
+      }
+    }
+    async function restaurants(){
+
+      var values = await fetch("./Chipotle.json")
+      var value_data = await values.json() 
+      value_data.map((e) => {
+        
+        // return{"type": "Feature", geometry: e.geometry}
+      })
+    } 
+
+		async function add_value(){
+
+			var values = await fetch("./Chipotle.json")
+      var value_data = await values.json() 
+
+      values = value_data.map((e) => {
+        
+        // createmarkerhere(e.geometry, "blue")
+        return{"type": "Feature", geometry: e.geometry}
+      })
+
+      //  values = await fetch("./All_restaurants.json")
+      //  value_data = await values.json() 
+      // values = value_data.map((e) => {
+        
+      //   // createmarkerhere(e.geometry, "blue")
+      //   return{"type": "Feature", geometry: {"type":"Point", "coordinates":e}}
+      // })
+
+      map.addSource('shoppingcenter', {
+        'type': 'geojson',
+        'data': {
+        'type': 'FeatureCollection',
+        'features': values
+        }})
+        map.addLayer({
+        'id': 'shoppingcenter',
+        'type': 'symbol',
+        'source': 'shoppingcenter',
+            'layout': {
+              "icon-image": "marker-15",
+              'icon-size': 1,
+              'icon-allow-overlap': true
+            }
+        });
+		}
+
+
+    </script>
+  </body>
+</html>
