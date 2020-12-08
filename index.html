@@ -2,33 +2,33 @@
 <html>
   <head>
     <meta charset='utf-8' />
-    <div class="mapchange2"><button onclick="valuechangedincome()">Markers</button></div>
-    <div class="mapchange"><button onclick="createlayer()">Data Layer</button></div>
+    <div class="mapchange2"><button onclick="restaurants()">Markers</button></div>
+    <div class="mapchange3"><button onclick="createlayer()">Data Layer</button></div>
     <div class="mapchange"><button onclick="createlayer(true)">Data Layer Names</button></div>
 
     <div class="mapchange4"><button onclick="add_value()">Marker Layer</button></div>
 
     <div class="mapvalue" id="restaurants">
       <div class="image-total">
-        <div style="background: rgba(230,0,0, .95)" class="image-stable"></div><div class="image-text">Above 15%</div>
+        <div style="background: rgba(230,0,0, .95)" class="image-stable"></div><div class="image-text">Highest</div>
       </div>
             <div class="image-total">
-        <div style="background: rgba(230,10,0, .85)" class="image-stable"></div><div class="image-text">10% - 15%</div>
+        <div style="background: rgba(230,10,0, .85)" class="image-stable"></div><div class="image-text">High</div>
       </div>
             <div class="image-total">
-        <div style="background: rgba(230,20,0, .75)" class="image-stable"></div><div class="image-text">8% - 10%</div>
+        <div style="background: rgba(230,20,0, .75)" class="image-stable"></div><div class="image-text">Medium High</div>
       </div>
             <div class="image-total">
-        <div style="background: rgba(230,35,0, .62)" class="image-stable"></div><div class="image-text">6% - 8%</div>
+        <div style="background: rgba(230,35,0, .62)" class="image-stable"></div><div class="image-text">Medium</div>
       </div>
             <div class="image-total">
-        <div style="background: rgba(230,45,0, .58)" class="image-stable"></div><div class="image-text">4% - 6%</div>
+        <div style="background: rgba(230,45,0, .58)" class="image-stable"></div><div class="image-text">Medium High</div>
       </div>
             <div class="image-total">
-        <div style="background: rgba(230,55,0, .5)" class="image-stable"></div><div class="image-text">2% - 4%</div>
+        <div style="background: rgba(230,55,0, .5)" class="image-stable"></div><div class="image-text">Low</div>
       </div>
             <div class="image-total">
-        <div style="background: rgba(230,65,0, .42)" class="image-stable"></div><div class="image-text">Under 2%</div>
+        <div style="background: rgba(230,65,0, .42)" class="image-stable"></div><div class="image-text">Lowest</div>
       </div>
     </div>
 <!--     <title></title>
@@ -100,6 +100,9 @@
       height: 13px;
       display: inline-block;
     }
+    button{
+      font-size: 10px
+    }
     .image-text{
           display: inline-block;
     position: absolute;
@@ -113,7 +116,7 @@
     .mapchange2{
       position: absolute;
       z-index: 5;
-      left: 150px
+      left: 178px
     }
     .mapboxgl-ctrl-attrib{
       display: none;
@@ -133,12 +136,12 @@
     .mapchange3{
       position: absolute;
       z-index: 5;
-      left: 150px
+      left: 110px
     }
     .mapchange4{
             position: absolute;
       z-index: 5;
-      left: 280px
+      left: 240px
     }
       #map {
         position: absolute;
@@ -267,7 +270,7 @@
       var values = await fetch("./Chipotle.json")
       var value_data = await values.json() 
       value_data.map((e) => {
-        
+        createmarkerhere(e.geometry, "blue")
         // return{"type": "Feature", geometry: e.geometry}
       })
     } 
@@ -303,7 +306,7 @@
         'source': 'shoppingcenter',
             'layout': {
               "icon-image": "marker-15",
-              'icon-size': 1,
+              'icon-size': 1.2,
               'icon-allow-overlap': true
             }
         });
